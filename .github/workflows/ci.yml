@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ master, rm0-dev ]
+    branches: [ master, rm1-dev ]
   pull_request:
     branches: [ master ]
 
@@ -26,3 +26,5 @@ jobs:
     - name: Run tests
       run: |
         python -m pytest
+      env:
+        GITHUB_TOKEN: "fake-token"
