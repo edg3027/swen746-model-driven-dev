@@ -33,10 +33,9 @@ class DummyRepo:
 
 class DummyGithub:
     def __init__(self, token):
-        self.token = token  # Store token but don't require specific value
+        self.token = token
     
     def get_repo(self, repo_name):
-        # Return a repo object that will be set by the test
         if hasattr(self, '_repo'):
             return self._repo
         raise AttributeError("_repo not set on DummyGithub instance")
@@ -99,7 +98,6 @@ def test_fetch_commits_empty(monkeypatch):
 
 def test_fetch_commits_unknown_author(monkeypatch):
     # Test handling of commits with missing author information
-    # We need to fix the repo_miner.py to handle None dates properly
     now = datetime.now()
     commits = [
         DummyCommit("sha1", "Unknown Author", "unknown@example.com", now, "Commit with author"),
