@@ -25,7 +25,7 @@ def fetch_issues(repo_name: str, state: str = "all", max_issues: int = None) -> 
         raise ValueError("GITHUB_TOKEN environment variable not set")
 
     # 2) Initialize client and get the repo
-    g = Github(auth=Auth.Token(token))
+    g = Github(token)
     repo = g.get_repo(repo_name)
 
     # 3) Fetch issues, filtered by state ('all', 'open', 'closed')
@@ -72,7 +72,7 @@ def fetch_commits(repo_name: str, max_commits: int = None) -> pd.DataFrame:
         raise ValueError("GITHUB_TOKEN environment variable not set")
 
     # 2) Initialize GitHub client and get the repo
-    g = Github(auth=Auth.Token(token))
+    g = Github(token)
     repo = g.get_repo(repo_name)
 
     # 3) Fetch commit objects (paginated by PyGitHub)
