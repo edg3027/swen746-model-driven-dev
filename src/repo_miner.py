@@ -116,7 +116,7 @@ def merge_and_summarize(commits_df: pd.DataFrame, issues_df: pd.DataFrame) -> No
     issues['closed_at'] = pd.to_datetime(issues['closed_at'], errors='coerce')
 
     # 2) Top 5 committers
-    print("Top 5 committers:")
+    print("Top 5 Committers:")
     committer_stats = commits['author'].value_counts().head(5)
     for author, count in committer_stats.items():
         print(f"{author}: {count} commits")
@@ -125,7 +125,7 @@ def merge_and_summarize(commits_df: pd.DataFrame, issues_df: pd.DataFrame) -> No
     # 3) Calculate issue close rate
     total_issues = len(issues)
     if total_issues > 0:
-        closed_issues = len(issues['state'] == 'closed')
+        closed_issues = len(issues[issues['state'] == 'closed'])
         close_rate = closed_issues / total_issues
         print(f"Issue Close Rate: {close_rate:.1%} ({closed_issues}/{total_issues} issues closed)")
     else:
