@@ -14,3 +14,9 @@ A data-collection pipeline for GitHub commit and issue data.
 Fetch commits from a repository:
 ```bash
 python -m src.repo_miner fetch-commits --repo owner/repo --max 100 --out commits.csv
+```
+
+Merge and summarize output:
+```bash
+python -m src.repo_miner summarize --commits commits.csv --issues issues.csv
+```

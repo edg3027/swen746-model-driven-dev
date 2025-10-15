@@ -171,3 +171,34 @@ def test_fetch_issues_open_duration_days(monkeypatch):
 
     df = fetch_issues("any/repo", state="all")
     assert df.iloc[0]["open_duration_days"] == 5
+
+def test_merge_and_summarize_output(capsys):
+    # Prepare test DataFrames
+    df_commits = pd.DataFrame({
+        "sha": ["a", "b", "c", "d"],
+        "author": ["X", "Y", "X", "Z"],
+        "email": ["x@e", "y@e", "x@e", "z@e"],
+        "date": ["2025-01-01T00:00:00", "2025-01-01T01:00:00",
+                 "2025-01-02T00:00:00", "2025-01-02T01:00:00"],
+        "message": ["m1", "m2", "m3", "m4"]
+    })
+    df_issues = pd.DataFrame({
+        "id": [1,2,3],
+        "number": [101,102,103],
+        "title": ["I1","I2","I3"],
+        "user": ["u1","u2","u3"],
+        "state": ["closed","open","closed"],
+        "created_at": ["2025-01-01T00:00:00","2025-01-01T02:00:00","2025-01-02T00:00:00"],
+        "closed_at": ["2025-01-01T12:00:00",None,"2025-01-02T12:00:00"],
+        "comments": [0,1,2]
+    })
+    # Run summarize
+    merge_and_summarize(df_commits, df_issues)
+    captured = capsys.readouterr().out
+    # Check top committer
+    assert "Top 5 committers" in captured
+    assert "X: 2 commits" in captured
+    # Check close rate
+    assert "Issue close rate: 67.0%" in captured
+    # Check avg open duration
+    assert "Average Open Duration for Closed Issues:" in captured
