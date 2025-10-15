@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import pytest
 from datetime import datetime, timedelta
-from src.repo_miner import fetch_commits, fetch_issues
+from src.repo_miner import fetch_commits, fetch_issues, merge_and_summarize
 
 # --- Helpers for dummy GitHub API objects ---
 
