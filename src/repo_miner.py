@@ -127,7 +127,7 @@ def merge_and_summarize(commits_df: pd.DataFrame, issues_df: pd.DataFrame) -> No
     if total_issues > 0:
         closed_issues = len(issues[issues['state'] == 'closed'])
         close_rate = closed_issues / total_issues
-        print(f"Issue Close Rate: {close_rate:.1%} ({closed_issues}/{total_issues} issues closed)")
+        print(f"Issue Close Rate: {close_rate:.2f} ({closed_issues}/{total_issues} issues closed)")
     else:
         print("Issue Close Rate: No issues found")
     print()

@@ -199,6 +199,6 @@ def test_merge_and_summarize_output(capsys):
     assert "Top 5 Committers" in captured
     assert "X: 2 commits" in captured
     # Check close rate
-    assert "Issue Close Rate: 67.0%" in captured
+    assert "Issue Close Rate: 0.67" in captured
     # Check avg open duration
     assert "Average Open Duration for Closed Issues:" in captured
